@@ -77,7 +77,16 @@ class RemoteService : Service() {
         onConnectionStateChanged?.invoke(false)
     }
 
-    fun sendCommand(command: String) {
+    fun sendCommand(direction: String) {
+        val prefs = getSharedPreferences("RemotePrefs", Context.MODE_PRIVATE)
+        val mode = prefs.getString("NavMode", "UP_DOWN")
+
+        val command = if (mode == "UP_DOWN") {
+            if (direction == "next") "down" else "up"
+        } else {
+            if (direction == "next") "right" else "left"
+        }
+        
         webSocket?.send(command)
     }
 
@@ -95,9 +104,17 @@ class RemoteService : Service() {
             // Setup volume provider
             val volumeProvider = object : VolumeProviderCompat(VOLUME_CONTROL_RELATIVE, 100, 50) {
                 override fun onAdjustVolume(direction: Int) {
-                    if (direction == 1) {
+                    val prefs = getSharedPreferences("RemotePrefs", Context.MODE_PRIVATE)
+                    val isInverted = prefs.getBoolean("InvertVolume", false)
+                    
+                    var finalDirection = direction
+                    if (isInverted) {
+                        finalDirection *= -1
+                    }
+
+                    if (finalDirection == 1) {
                         sendCommand("next")
-                    } else if (direction == -1) {
+                    } else if (finalDirection == -1) {
                         sendCommand("prev")
                     }
                 }

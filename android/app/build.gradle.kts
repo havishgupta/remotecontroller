@@ -43,4 +43,5 @@ dependencies {
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("androidx.media:media:1.7.0") // Needed for VolumeProviderCompat / MediaSessionCompat
     implementation("com.squareup.okhttp3:okhttp:4.12.0") // For WebSockets
+    implementation("com.journeyapps:zxing-android-embedded:4.3.0") // QR Code Scanner
 }

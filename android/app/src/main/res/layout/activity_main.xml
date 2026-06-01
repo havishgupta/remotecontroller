@@ -1,66 +1,134 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="32dp"
-    android:gravity="center"
+    android:fillViewport="true"
     tools:context=".MainActivity">
-
-    <TextView
-        android:id="@+id/tvStatus"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/status_disconnected"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:layout_marginBottom="32dp" />
-
-    <EditText
-        android:id="@+id/etIpAddress"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/ip_hint"
-        android:inputType="textUri"
-        android:layout_marginBottom="16dp"/>
-
-    <Button
-        android:id="@+id/btnConnect"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/connect"
-        android:layout_marginBottom="32dp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="vertical"
+        android:padding="32dp"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/tvStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/status_disconnected"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="32dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="16dp">
+
+            <EditText
+                android:id="@+id/etIpAddress"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:hint="@string/ip_hint"
+                android:inputType="textUri"/>
+
+            <Button
+                android:id="@+id/btnScanQr"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Scan QR"
+                android:layout_marginStart="8dp"/>
+        </LinearLayout>
 
         <Button
-            android:id="@+id/btnPrev"
-            android:layout_width="0dp"
-            android:layout_height="80dp"
-            android:layout_weight="1"
-            android:text="@string/prev"
-            android:layout_marginEnd="8dp"/>
+            android:id="@+id/btnConnect"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/connect"
+            android:layout_marginBottom="32dp"/>
 
-        <Button
-            android:id="@+id/btnNext"
-            android:layout_width="0dp"
-            android:layout_height="80dp"
-            android:layout_weight="1"
-            android:text="@string/next"
-            android:layout_marginStart="8dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="32dp">
+
+            <Button
+                android:id="@+id/btnPrev"
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:layout_weight="1"
+                android:text="@string/prev"
+                android:layout_marginEnd="8dp"/>
+
+            <Button
+                android:id="@+id/btnNext"
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:layout_weight="1"
+                android:text="@string/next"
+                android:layout_marginStart="8dp"/>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#DDDDDD"
+            android:layout_marginBottom="16dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Settings"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="16dp"/>
+
+        <Switch
+            android:id="@+id/swInvertVolume"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Invert Volume Buttons"
+            android:layout_marginBottom="16dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Navigation Keys"
+            android:layout_marginBottom="8dp"/>
+
+        <RadioGroup
+            android:id="@+id/rgNavMode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RadioButton
+                android:id="@+id/rbUpDown"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Up / Down (PowerPoint)" />
+
+            <RadioButton
+                android:id="@+id/rbLeftRight"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Left / Right (Google Slides)" />
+        </RadioGroup>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tip: You can use volume buttons (even when screen is off) while connected."
+            android:layout_marginTop="32dp"
+            android:gravity="center"
+            android:textSize="12sp"
+            android:textColor="#666666"/>
 
     </LinearLayout>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Tip: You can use volume buttons (even when screen is off) while connected."
-        android:layout_marginTop="32dp"
-        android:gravity="center"
-        android:textColor="#666666"/>
-
-</LinearLayout>
+</ScrollView>
