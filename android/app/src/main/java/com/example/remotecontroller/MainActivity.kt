@@ -23,6 +23,12 @@ class MainActivity : AppCompatActivity() {
     private lateinit var btnConnect: Button
     private lateinit var btnPrev: Button
     private lateinit var btnNext: Button
+    
+    // Timer UI
+    private lateinit var tvTimerDisplay: TextView
+    private lateinit var etTimerMinutes: EditText
+    private lateinit var btnStartTimer: Button
+    private lateinit var btnStopTimer: Button
 
     private var remoteService: RemoteService? = null
     private var isBound = false
@@ -34,10 +40,18 @@ class MainActivity : AppCompatActivity() {
             remoteService = binder.getService()
             isBound = true
 
+            // Set up connection callback
             remoteService?.onConnectionStateChanged = { connected ->
                 runOnUiThread {
                     isConnected = connected
                     updateUi()
+                }
+            }
+            
+            // Set up timer callback
+            remoteService?.onTimerTick = { timeString ->
+                runOnUiThread {
+                    tvTimerDisplay.text = timeString
                 }
             }
         }
@@ -57,6 +71,11 @@ class MainActivity : AppCompatActivity() {
         btnConnect = findViewById(R.id.btnConnect)
         btnPrev = findViewById(R.id.btnPrev)
         btnNext = findViewById(R.id.btnNext)
+        
+        tvTimerDisplay = findViewById(R.id.tvTimerDisplay)
+        etTimerMinutes = findViewById(R.id.etTimerMinutes)
+        btnStartTimer = findViewById(R.id.btnStartTimer)
+        btnStopTimer = findViewById(R.id.btnStopTimer)
 
         checkPermissions()
 
@@ -87,14 +106,27 @@ class MainActivity : AppCompatActivity() {
             remoteService?.sendCommand("next")
         }
         
+        btnStartTimer.setOnClickListener {
+            val mins = etTimerMinutes.text.toString().toIntOrNull() ?: 10
+            remoteService?.startTimer(mins)
+        }
+        
+        btnStopTimer.setOnClickListener {
+            remoteService?.stopTimer()
+        }
+        
         updateUi()
     }
 
     private fun checkPermissions() {
+        val permissions = mutableListOf<String>()
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.POST_NOTIFICATIONS), 101)
+                permissions.add(Manifest.permission.POST_NOTIFICATIONS)
             }
+        }
+        if (permissions.isNotEmpty()) {
+            ActivityCompat.requestPermissions(this, permissions.toTypedArray(), 101)
         }
     }
 
