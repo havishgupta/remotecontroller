@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Remote Controller</string>
+    <string name="connect">Connect</string>
+    <string name="disconnect">Disconnect</string>
+    <string name="status_disconnected">Status: Disconnected</string>
+    <string name="status_connected">Status: Connected</string>
+    <string name="next">Next</string>
+    <string name="prev">Previous</string>
+    <string name="ip_hint">PC IP Address (e.g. 192.168.1.5)</string>
+</resources>
