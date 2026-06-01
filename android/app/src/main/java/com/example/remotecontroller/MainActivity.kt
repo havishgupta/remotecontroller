@@ -23,12 +23,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var btnConnect: Button
     private lateinit var btnPrev: Button
     private lateinit var btnNext: Button
-    
-    // Timer UI
-    private lateinit var tvTimerDisplay: TextView
-    private lateinit var etTimerMinutes: EditText
-    private lateinit var btnStartTimer: Button
-    private lateinit var btnStopTimer: Button
 
     private var remoteService: RemoteService? = null
     private var isBound = false
@@ -40,18 +34,10 @@ class MainActivity : AppCompatActivity() {
             remoteService = binder.getService()
             isBound = true
 
-            // Set up connection callback
             remoteService?.onConnectionStateChanged = { connected ->
                 runOnUiThread {
                     isConnected = connected
                     updateUi()
-                }
-            }
-            
-            // Set up timer callback
-            remoteService?.onTimerTick = { timeString ->
-                runOnUiThread {
-                    tvTimerDisplay.text = timeString
                 }
             }
         }
@@ -71,11 +57,6 @@ class MainActivity : AppCompatActivity() {
         btnConnect = findViewById(R.id.btnConnect)
         btnPrev = findViewById(R.id.btnPrev)
         btnNext = findViewById(R.id.btnNext)
-        
-        tvTimerDisplay = findViewById(R.id.tvTimerDisplay)
-        etTimerMinutes = findViewById(R.id.etTimerMinutes)
-        btnStartTimer = findViewById(R.id.btnStartTimer)
-        btnStopTimer = findViewById(R.id.btnStopTimer)
 
         checkPermissions()
 
@@ -104,15 +85,6 @@ class MainActivity : AppCompatActivity() {
 
         btnNext.setOnClickListener {
             remoteService?.sendCommand("next")
-        }
-        
-        btnStartTimer.setOnClickListener {
-            val mins = etTimerMinutes.text.toString().toIntOrNull() ?: 10
-            remoteService?.startTimer(mins)
-        }
-        
-        btnStopTimer.setOnClickListener {
-            remoteService?.stopTimer()
         }
         
         updateUi()

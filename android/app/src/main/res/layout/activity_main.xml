@@ -35,8 +35,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginBottom="32dp">
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/btnPrev"
@@ -56,59 +55,12 @@
 
     </LinearLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#DDDDDD"
-        android:layout_marginBottom="16dp"/>
-
-    <TextView
-        android:id="@+id/tvTimerDisplay"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="00:00"
-        android:textSize="36sp"
-        android:textStyle="bold"
-        android:layout_marginBottom="16dp"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical">
-
-        <EditText
-            android:id="@+id/etTimerMinutes"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:hint="@string/timer_hint"
-            android:inputType="number"
-            android:text="10"
-            android:textAlignment="center"/>
-
-        <Button
-            android:id="@+id/btnStartTimer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/start_timer"
-            android:layout_marginStart="8dp"/>
-            
-        <Button
-            android:id="@+id/btnStopTimer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/stop_timer"
-            android:layout_marginStart="8dp"/>
-    </LinearLayout>
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Shortcut: Press Volume Up then Down quickly to start timer."
-        android:layout_marginTop="24dp"
+        android:text="Tip: You can use volume buttons (even when screen is off) while connected."
+        android:layout_marginTop="32dp"
         android:gravity="center"
-        android:textSize="12sp"
         android:textColor="#666666"/>
 
 </LinearLayout>
